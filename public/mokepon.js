@@ -158,7 +158,7 @@ function iniciarJuego() {
 }
 
 function unirseAlJuego() {
-    fetch("http://192.168.1.141:8080/unirse")
+    fetch("http://localhost:8080/unirse")
         .then(function (res) {
             if (res.ok) {
                 res.text()
