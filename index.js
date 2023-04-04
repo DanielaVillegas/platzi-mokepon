@@ -11,7 +11,7 @@ app.use(cors())
 app.use(express.json())
 
 
-const jugadores = []
+let jugadores = []
 
 class Jugador {
     constructor(id) {
@@ -47,25 +47,22 @@ app.get("/unirse", (req, res) => {
     res.send(id)
 })
 
-app.get("/salir/:jugadorId", (req, res) => {
-    const id = req.params.jugadorId
+app.get("/salir/:jugadorId", (request, res) => {
+    const req = request
+    const jugadorId = req.params.jugadorId
 
     console.log(`Jugadores: ${jugadores}`)
-    console.log(`Salir jugador con ${id}`)
- 
-    const index = jugadores.indexOf(id);
+    console.log(`Salir jugador con id: ${jugadorId}`)
+    debugger
+    // FIXME: search player with ID in players array objet.
 
-    if (index > -1) { // only splice array when item is found
-        jugadores.splice(index, 1);
-        res.send(jugadores)
-        return
-    }
-
-    res.setHeader("Access-Control-Allow-Origin", "*")
-
-    console.log(`No se encontro jugador con ID ${id}`)
-    res.send({ error: `No se encontro jugador con ID ${id}` })
-
+    const jugadoresFiltradosPorId = jugadores.filter((elemento, index) => {
+        console.log(elemento.id)
+        return elemento.id !== jugadorId
+    })
+    console.log(JSON.stringify(jugadoresFiltradosPorId))
+    jugadores = jugadoresFiltradosPorId
+    res.end()
 })
 
 app.post("/mokepon/:jugadorId", (req, res) => {
