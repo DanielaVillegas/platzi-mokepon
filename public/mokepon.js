@@ -391,9 +391,23 @@ function crearMensajeFinal(resultadoFinal) {
     sectionSeleccionarReiniciar.style.display = "block"
 }
 
+
 function reiniciarJuego() {
+    eliminarJugador()
     location.reload()
+
 }
+function eliminarJugador() {
+    fetch(`http://localhost:8080/salir/${jugadorId}`)
+        .then(function (res) {
+            if (res.ok) {
+                console.log("Eliminando jugador")
+            }else {
+                console.log("No se elimino el jugador")
+            }
+        })
+}
+
 
 function aleatorio(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
@@ -420,6 +434,7 @@ function pintarCanvas() {
             revisarColision(mokepon)
         }
     })
+
 
 }
 function enviarPosicion(x, y) {
@@ -536,6 +551,7 @@ function revisarColision(enemigo) {
     }
     detenerMovimiento()
     clearInterval(intervalo)
+
     console.log("Se detrcto una colision");
 
     enemigoId = enemigo.id

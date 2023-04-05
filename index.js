@@ -53,7 +53,7 @@ app.get("/salir/:jugadorId", (request, res) => {
 
     console.log(`Jugadores: ${jugadores}`)
     console.log(`Salir jugador con id: ${jugadorId}`)
-    debugger
+    
     // FIXME: search player with ID in players array objet.
 
     const jugadoresFiltradosPorId = jugadores.filter((elemento, index) => {
